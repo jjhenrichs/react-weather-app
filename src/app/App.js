@@ -1,19 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import useGeolocation from "../hooks/useGeolocation";
 
 function App() {
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(successCallBack, errorCallBack);
-  }, []);
+  const [locationInfo, locationError] = useGeolocation();
 
-  const successCallBack = (position) => {
-    console.log(position);
-  };
-
-  const errorCallBack = (error) => {
-    console.log(error);
-  };
-
-  return <div className="App">Hello World</div>;
+  return (
+    <div className="App">
+      <h1 className="App-header"> Weather App</h1>
+      {console.log(locationInfo, locationError)}
+    </div>
+  );
 }
 
 export default App;
