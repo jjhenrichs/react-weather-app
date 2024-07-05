@@ -1,6 +1,4 @@
-// let url =
-//   `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}lon=${longitude}` +
-//   `&appid=635d9b0c3316e8567568637146fb5fbe`;
+let url = "";
 
 const Weather = {
   fetchWeather() {
@@ -10,7 +8,11 @@ const Weather = {
 
     // success callback function
     const successCB = ({ coords }) => {
-      console.log(coords);
+      latitude = coords.latitude;
+      longitude = coords.longitude;
+      url =
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}lon=${longitude}` +
+        `&appid=635d9b0c3316e8567568637146fb5fbe`;
     };
 
     // error callback function
