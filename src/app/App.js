@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import useGeolocation from "../utils/fetchWeather";
+import Weather from "../utils/Weather";
 
 function App() {
-  const [latitude, longitude, locationError] = useGeolocation();
-
   useEffect(() => {
     const data = document.getElementById("data");
 
-    if (locationError) {
-      data.innerHTML = locationError;
-    } else {
-      console.log(latitude);
-      console.log(longitude);
-    }
-  }, [latitude, longitude, locationError]);
+    Weather.fetchWeather();
+  }, []);
 
   return (
     <div className="App">
