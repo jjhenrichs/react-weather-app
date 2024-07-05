@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useGeolocation() {
+function useGeolocation() {
   const [locationInfo, setLocationInfo] = useState(null);
   const [locationError, setLocationError] = useState(null);
   const [latitude, setLatitude] = useState(null);
@@ -8,7 +8,6 @@ export default function useGeolocation() {
 
   // Success Callback Function
   const successCB = ({ coords }) => {
-    console.log(coords);
     setLocationInfo({ latitude: coords.latitude, longitude: coords.longitude });
     setLatitude(coords.latitude);
     setLongitude(coords.longitude);
@@ -16,7 +15,6 @@ export default function useGeolocation() {
 
   // Error Callback Function
   const errorCB = ({ message }) => {
-    console.log(message);
     setLocationError(message);
   };
 
@@ -27,3 +25,5 @@ export default function useGeolocation() {
 
   return [latitude, longitude, locationError];
 }
+
+function fetchWeather() {}
