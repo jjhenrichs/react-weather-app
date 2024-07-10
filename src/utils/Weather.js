@@ -1,29 +1,53 @@
-let url = "";
+// export const getGeolocation = () => {
+//   const latitude = null;
+//   const longitude = null;
+//   let locationError = null;
 
-const Weather = {
-  fetchWeather() {
-    let latitude = null;
-    let longitude = null;
-    let locationError = null;
+//   const successFn = (res) => {
+//     console.log(res);
+//   };
 
-    // success callback function
-    const successCB = ({ coords }) => {
-      latitude = coords.latitude;
-      longitude = coords.longitude;
-      url =
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}lon=${longitude}` +
-        `&appid=635d9b0c3316e8567568637146fb5fbe`;
-    };
+//   const errorFn = (res) => {
+//     const { message } = res;
+//     locationError = message;
+//     console.log(locationError);
+//   };
 
-    // error callback function
-    const errorCB = ({ message }) => {
-      locationError = message;
-    };
+//   if (!locationError && !latitude && !longitude)
+//     navigator.geolocation.getCurrentPosition(successFn, errorFn);
 
-    if (!locationError && !latitude && !longitude) {
-      navigator.geolocation.getCurrentPosition(successCB, errorCB);
-    }
-  },
+//   console.log(locationError);
+// };
+
+export const getGeolocation = async () => {
+  const latitude = null;
+  const longitude = null;
+  let locationError = null;
+
+  const getLocation = () => {
+    return new Promise((resolve, reject) => {
+      const successFn = (res) => {
+        console.log(res);
+        resolve();
+      };
+
+      const errorFn = (res) => {
+        const { message } = res;
+        locationError = message;
+        console.log(locationError);
+        reject(message);
+      };
+
+      if (!locationError && !latitude && !longitude)
+        navigator.geolocation.getCurrentPosition(successFn, errorFn);
+    });
+  };
+
+  try {
+    await getLocation();
+  } catch (error) {
+    console.error(error);
+  }
+
+  console.log(locationError);
 };
-
-export default Weather;

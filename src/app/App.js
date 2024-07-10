@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Weather from "../utils/Weather";
+import { getGeolocation } from "../utils/Weather";
 
 function App() {
   useEffect(() => {
     const data = document.getElementById("data");
 
-    Weather.fetchWeather();
+    getGeolocation();
   }, []);
 
   return (
