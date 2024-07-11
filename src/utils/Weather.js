@@ -20,14 +20,17 @@
 // };
 
 export const getGeolocation = async () => {
-  const latitude = null;
-  const longitude = null;
+  let latitude = null;
+  let longitude = null;
   let locationError = null;
 
   const getLocation = () => {
     return new Promise((resolve, reject) => {
       const successFn = (res) => {
-        console.log(res);
+        const { coords } = res;
+        console.log(coords);
+        latitude = coords.latitude;
+        longitude = coords.longitude;
         resolve();
       };
 
@@ -39,15 +42,16 @@ export const getGeolocation = async () => {
       };
 
       if (!locationError && !latitude && !longitude)
-        navigator.geolocation.getCurrentPosition(successFn, errorFn);
+        navigator.geolocation.getCurrentPosition(successFn, errorFn); // asynchronous function
     });
   };
 
   try {
     await getLocation();
   } catch (error) {
-    console.error(error);
+    console.error(`${error}.\n I need access to your location to work.`);
+  } finally {
+    console.log(locationError, latitude, longitude);
+    return { locationError, latitude, longitude };
   }
-
-  console.log(locationError);
 };

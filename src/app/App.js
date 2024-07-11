@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getGeolocation } from "../utils/Weather";
 
 function App() {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [locationError, setLocationError] = useState(null);
   useEffect(() => {
     const data = document.getElementById("data");
 
-    getGeolocation();
+    const { error, lat, long } = getGeolocation();
+    console.log(error, lat, long);
   }, []);
 
   return (
